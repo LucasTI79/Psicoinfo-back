@@ -1,6 +1,6 @@
-export default {
+export const mySqlConfig = {
   host: "localhost",
   user: "root",
-  database: "psicoinfo",
+  database: "Psicoinfo",
   password: "admin",
 };

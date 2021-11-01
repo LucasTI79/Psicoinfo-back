@@ -1,13 +1,12 @@
 // import { createConnection } from "typeorm";
-
-import mysqlconfig from "../app/config/mysqlconfig";
+import mysql from "mysql2";
+import {mySqlConfig} from "../config/mysqlconfig";
 
 // createConnection().then(() => console.log('Successfully connected with database'))
-
-export default function execute(instrucao) {
-  // // VERIFICA A VARIÁVEL DE AMBIENTE SETADA EM app.js
+export default function executar(instrucao) {
+  // VERIFICA A VARIÁVEL DE AMBIENTE SETADA EM app.js
   if (process.env.AMBIENTE_PROCESSO == "producao") {
-      return new Promise(() => (resolve, reject) => {
+      return new Promise(function (resolve, reject) {
           sql.connect(sqlServerConfig).then(function () {
               return sql.query(instrucao);
           }).then(function (resultados) {
@@ -22,15 +21,17 @@ export default function execute(instrucao) {
           });
       });
   } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-      return new Promise(() => (resolve, reject) => {
-          var conexao = mysql.createConnection(mysqlconfig);
+      return new Promise(function (resolve, reject) {
+          var conexao = mysql.createConnection(mySqlConfig);
+         
           conexao.connect();
+        
           conexao.query(instrucao, function (erro, resultados) {
               conexao.end();
               if (erro) {
                   reject(erro);
               }
-              console.log(resultados);
+              // console.log(resultados);
               resolve(resultados);
           });
           conexao.on('error', function (erro) {
