@@ -1,13 +1,15 @@
-const path = require('path');
-const nodemailer = require('nodemailer');
-const hbs = require('nodemailer-express-handlebars');
+import path from 'path';
 
-const { host, port, user, pass } = require('../config/mailer.json');
+import nodemailer from 'nodemailer';
+
+import hbs from 'nodemailer-express-handlebars';
+
+import configs from '../config/mailer';
 
 const transport = nodemailer.createTransport({
-    host,
-    port,
-    auth: { user, pass }
+    host: configs.host,
+    port: configs.port,
+    auth: { user: configs.user, pass: configs.pass }
 });
 
 // transport.use('compile', hbs({
@@ -27,4 +29,4 @@ transport.use('compile', hbs({
     extName: '.html',
   }));
 
-module.exports = transport;
+export default transport;

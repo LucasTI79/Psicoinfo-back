@@ -11,8 +11,7 @@
     "mysql2": "^2.3.2",
     "nodemailer": "^6.7.0",
     "nodemailer-express-handlebars": "^4.0.0",
-    "nodemon": "^2.0.14",
-    "typeorm": "^0.2.38"
+    "nodemon": "^2.0.14"
   },
   "scripts": {
     "dev": "nodemon --experimental-modules --es-module-specifier-resolution=node  server.js"

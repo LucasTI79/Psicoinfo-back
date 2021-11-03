@@ -2,13 +2,17 @@ import UsersRepository from "../repository/UsersRepository"
 
 export default async function handle(email, password){
   if(email && password){
-    console.log(email, password)
     try{
-      return await UsersRepository.authenticate(email, password)
+      const user = await UsersRepository.authenticate(email, password);
+      if(user.length == 0) {
+        throw new Error("Credenciais inválidas")
+      }else{
+        return user
+      }
     }catch(err){
-      return new Error("Entrada de dados inválida");
+      throw new Error(err);
     }
   }else{
-    return new Error("Entrada de dados inválida");
+    throw new Error("Insira suas credenciais");
   }
 } 

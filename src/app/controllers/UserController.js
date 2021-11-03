@@ -1,6 +1,8 @@
 import createUser from "../services/createUser";
 import listUsers from "../services/listUsers";
 import authUser from "../services/authUser";
+import forgotUser from "../services/forgotUser";
+import resetPassword from "../services/resetPassword";
 
 export default {
   async index(req,res){
@@ -31,10 +33,33 @@ export default {
     try{
       const { email, password } = req.body;
       const user = await authUser(email, password);
-      res.status(201).send(user);
+      delete user[0].pw
+      res.status(200).json({user});
     }catch(err){
-      // console.log(err)
       res.status(400).json({ error: err.message });
+    }
+  },
+
+  async forgot(req, res){
+    try{
+        const { email } = req.body;
+        await forgotUser(email);
+        res.status(200).json({ message: 'Email enviado' });
+        }catch(err){
+        res.status(400).send({ error: err.message});
+     }
+  },
+
+  async reset(req,res){
+    try {
+        const { email, token, password } = req.body;
+
+        await resetPassword(email, token, password)
+
+        res.status(200).json({message: 'Senha alterada com sucesso'});
+
+    } catch (err){
+        res.status(400).send({ error: 'Cannot update password, try again' })
     }
   }
 };
