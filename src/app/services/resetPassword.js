@@ -2,16 +2,11 @@ import UsersRepository from "../repository/UsersRepository"
 import mailer from '../../modules/mailer'
 import crypto from 'crypto';
 
-export default async function handle(email, token, password){
+export default async function handle(token, password){
   try{
-    const user = await UsersRepository.listUserByEmail(email)
-    if(!user){
+    const user = await UsersRepository.listUserByToken(token)
+    if(user.length == 0){
       throw new Error('User not found')
-    }
-
-    if(token !== user[0].passwordResetToken){
-      throw new Error('Token invalid')
-
     }
 
     const now = new Date();
@@ -20,12 +15,11 @@ export default async function handle(email, token, password){
       throw new Error('Token expired, generate a new one')
     }
            
-    await UsersRepository.resetPassword(user[0].id, email, token, password);
+    await UsersRepository.resetPassword(token, password);
     
     return
     
   }catch(err){
-    // console.log('err',err)
     throw new Error(err);
   }
 } 

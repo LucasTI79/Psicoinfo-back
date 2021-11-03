@@ -46,15 +46,16 @@ export default {
         await forgotUser(email);
         res.status(200).json({ message: 'Email enviado' });
         }catch(err){
+          console.log('err',err)
         res.status(400).send({ error: err.message});
      }
   },
 
   async reset(req,res){
     try {
-        const { email, token, password } = req.body;
+        const { token, password } = req.body;
 
-        await resetPassword(email, token, password)
+        await resetPassword( token, password)
 
         res.status(200).json({message: 'Senha alterada com sucesso'});
 

@@ -5,7 +5,7 @@ import crypto from 'crypto';
 export default async function handle(email){
   try{
     const user = await UsersRepository.listUserByEmail(email)
-    if(!user){
+    if(user.length == 0){
       throw new Error('User not found')
     }
 

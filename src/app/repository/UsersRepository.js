@@ -33,6 +33,12 @@ export default {
     return user
   },
 
+  async listUserByToken(token){
+    const query = `SELECT * FROM tbUsers where passwordResetToken = '${token}' LIMIT 1`;
+    const user = await execute(query);
+    return user
+  },
+
   async authenticate(email, password){
     try{
       const query = `SELECT * FROM tbUsers where email = '${email}' and pw = '${password}'`;
@@ -54,9 +60,9 @@ export default {
     }
   },
 
-  async resetPassword(id, email, token, password){
+  async resetPassword(token, password){
     try{
-      const query = `UPDATE tbUsers SET pw = '${password}' where id = '${id}' and email = '${email}' and passwordResetToken = '${token}'`;
+      const query = `UPDATE tbUsers SET pw = '${password}', passwordResetToken = '${token}'`;
       return await execute(query);
     }catch(err){
       throw new Error('Erro ao alterar a senha')
