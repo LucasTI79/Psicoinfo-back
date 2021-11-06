@@ -1,6 +1,11 @@
+import { config } from 'dotenv';
+config({  
+  path: process.env.NODE_ENV === "development" ? ".env.development" : ".env.production"
+})
+
 export default {
-  host: "smtp.mailtrap.io",
-  port: 2525,
-  user: "5a9bac7362f91f",
-  pass: "3dd1c93991c66f"
+  host: process.env.SMTP_HOST,
+  port: process.env.SMTP_PORT,
+  user: process.env.SMTP_USER,
+  pass: process.env.SMTP_PASS
 }

@@ -2,7 +2,8 @@ import UsersRepository from "../repository/UsersRepository"
 
 export default async function handle(){
   try{
-    return await UsersRepository.listUsers()
+    const users = await UsersRepository.listUsers()
+    return users
   }catch(err){
     return new Error("Erro ao buscar usuários");
   }

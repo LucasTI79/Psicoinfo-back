@@ -5,7 +5,8 @@ import {mySqlConfig} from "../config/mysqlconfig";
 // createConnection().then(() => console.log('Successfully connected with database'))
 export default function executar(instrucao) {
   // VERIFICA A VARIÁVEL DE AMBIENTE SETADA EM app.js
-  if (process.env.AMBIENTE_PROCESSO == "producao") {
+//   console.log('env',process.env.NODE_ENV)
+  if (process.env.NODE_ENV == "production") {
       return new Promise(function (resolve, reject) {
           sql.connect(sqlServerConfig).then(function () {
               return sql.query(instrucao);
@@ -20,7 +21,7 @@ export default function executar(instrucao) {
               return ("ERRO NO SQL SERVER (Azure): ", erro);
           });
       });
-  } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+  } else if (process.env.NODE_ENV == "development") {
       return new Promise(function (resolve, reject) {
           var conexao = mysql.createConnection(mySqlConfig);
         

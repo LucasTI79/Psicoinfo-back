@@ -8,6 +8,7 @@ export default {
   async index(req,res){
     try{
       const user = await listUsers();
+      // console.log('users',user)
       res.status(200).json(user).send();
     }catch(err){
       console.log(err)
@@ -46,7 +47,6 @@ export default {
         await forgotUser(email);
         res.status(200).json({ message: 'Email enviado' });
         }catch(err){
-          console.log('err',err)
         res.status(400).send({ error: err.message});
      }
   },

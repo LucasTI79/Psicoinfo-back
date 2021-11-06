@@ -16,27 +16,45 @@ export default {
 
   async listUsers(){
     // console.log('amigo estou aqui')
-    const query = "SELECT * FROM tbUsers";
-    const users = await execute(query); 
-    return users
+    try{
+      const query = "SELECT id, username, email FROM tbUsers";
+      const users = await execute(query); 
+      return users
+    }catch(err){
+      throw new Error('Erro ao listar usuários')
+    }
+   
   },
 
   async listUserById(id){
-    const query = `SELECT * FROM tbUsers where id = '${id}'`;
-    const user = await execute(query);
-    return user
+    try{
+      const query = `SELECT * FROM tbUsers where id = '${id}'`;
+      const user = await execute(query);
+      return user
+    }catch(err){
+      throw new Error('Erro ao listar usuário por id')
+    }
+    
   },
 
   async listUserByEmail(email){
-    const query = `SELECT * FROM tbUsers where email = '${email}' LIMIT 1`;
-    const user = await execute(query);
-    return user
+    try{
+      const query = `SELECT * FROM tbUsers where email = '${email}' LIMIT 1`;
+      const user = await execute(query);
+      return user
+    }catch(err){
+      throw new Error('Erro ao listar usuário por id')
+    }
   },
 
   async listUserByToken(token){
-    const query = `SELECT * FROM tbUsers where passwordResetToken = '${token}' LIMIT 1`;
-    const user = await execute(query);
-    return user
+    try{
+      const query = `SELECT * FROM tbUsers where passwordResetToken = '${token}' LIMIT 1`;
+      const user = await execute(query);
+      return user
+    }catch(err){
+      throw new Error('Erro ao listar usuário por id')
+    }
   },
 
   async authenticate(email, password){
