@@ -10,6 +10,7 @@ export default async function handle(email, password){
         return user
       }
     }catch(err){
+      console.log('err', err)
       throw new Error(err);
     }
   }else{

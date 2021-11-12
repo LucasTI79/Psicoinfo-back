@@ -10,7 +10,7 @@ export default async function handle(username, email, password){
         return await UsersRepository.createUser(username, email, password)
       }
     }catch(err){
-      throw new Error(err)
+      throw new Error(err);
     }
   }else{
     throw new Error("Insira todos os valores solicitados");

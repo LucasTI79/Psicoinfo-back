@@ -60,8 +60,9 @@ export default {
   async authenticate(email, password){
     try{
       const query = `SELECT * FROM tbUsers where email = '${email}' and pw = '${password}'`;
-
+      // console.log('query',query)
       const user = await execute(query);
+      // console.log('userRepository', user)
       return user
     }catch(err){
       throw new Error('Erro ao autenticar')
@@ -80,7 +81,7 @@ export default {
 
   async resetPassword(token, password){
     try{
-      const query = `UPDATE tbUsers SET pw = '${password}', passwordResetToken = '${token}'`;
+      const query = `UPDATE tbUsers SET pw = '${password}' where passwordResetToken = '${token}'`;
       return await execute(query);
     }catch(err){
       throw new Error('Erro ao alterar a senha')

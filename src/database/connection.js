@@ -26,13 +26,14 @@ export default function executar(instrucao) {
           var conexao = mysql.createConnection(mySqlConfig);
         
           conexao.connect();
+        //   console.log('BD conectado');
         
           conexao.query(instrucao, function (erro, resultados) {
               conexao.end();
               if (erro) {
                   reject(erro);
               }
-              // console.log(resultados);
+            //   console.log('resultados',resultados);
               resolve(resultados);
           });
           conexao.on('error', function (erro) {

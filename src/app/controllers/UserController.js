@@ -9,19 +9,20 @@ export default {
     try{
       const user = await listUsers();
       // console.log('users',user)
-      res.status(200).json(user).send();
+      res.status(200).json(user);
     }catch(err){
-      console.log(err)
+      console.log('err',err)
       res.status(400).json({ error: 'Erro ao retornar usuários' });
     }
   },
   show(req,res){
   },
+
   async store(req,res){
     try{
       const { username, email, password } = req.body;
       await createUser(username, email, password);
-      res.status(201).json({ message: 'Usuário criado com sucesso' }).send();
+      res.status(201).json({ message: 'Usuário criado com sucesso' });
     }catch(err){
       res.status(400).json({ error: err.message });
     }
@@ -34,9 +35,15 @@ export default {
     try{
       const { email, password } = req.body;
       const user = await authUser(email, password);
-      delete user[0].pw
+      // {
+      //   username,
+      //   email,
+      //   password
+      // }
+      // delete user[0].pw
       res.status(200).json({user});
     }catch(err){
+      console.log('err',err)
       res.status(400).json({ error: err.message });
     }
   },
