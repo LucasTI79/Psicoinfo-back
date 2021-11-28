@@ -1,14 +1,14 @@
 import execute from "../../database/connection";
 
 export default {
-  async createUser(username, email, password){
+  async createUser(username, email, password, filename = 'user.jpg'){
     try{
       const query = `
-      INSERT INTO tbUsers (username, email, pw) VALUES ('${username}', '${email}', '${password}');
-    `;
+      INSERT INTO tbUsers (username, email, pw, filename) VALUES ('${username}', '${email}', '${password}','${filename}');`;
   
      return await execute(query);
     }catch(err){
+      console.log('err',err)
       throw new Error('Erro ao criar usuário')
     }
     
@@ -73,6 +73,7 @@ export default {
   async setToken(id,token, date){
     try{
       const query = `UPDATE tbUsers SET passwordResetToken = '${token}', passwordResetExpires = '${date}' where id = '${id}'`;
+      console.log('query',query);
       return await execute(query);
     }catch(err){
       throw new Error('Erro ao alterar o token do usuário')

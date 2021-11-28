@@ -21,7 +21,9 @@ export default {
   async store(req,res){
     try{
       const { username, email, password } = req.body;
-      await createUser(username, email, password);
+      // console.log('files',req.body, req.file)
+      // console.log('filname',req.filename)
+      await createUser(username, email, password, req.file.filename );
       res.status(201).json({ message: 'Usuário criado com sucesso' });
     }catch(err){
       res.status(400).json({ error: err.message });
@@ -35,12 +37,7 @@ export default {
     try{
       const { email, password } = req.body;
       const user = await authUser(email, password);
-      // {
-      //   username,
-      //   email,
-      //   password
-      // }
-      // delete user[0].pw
+      delete user[0].pw
       res.status(200).json({user});
     }catch(err){
       console.log('err',err)

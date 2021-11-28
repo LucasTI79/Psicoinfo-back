@@ -27,7 +27,7 @@ export default async function handle(email){
         return 
     });
   }catch(err){
-    // console.log('err',err)
+    console.log('err',err)
     throw new Error(err);
   }
 } 

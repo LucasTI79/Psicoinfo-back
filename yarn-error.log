@@ -1,5 +1,5 @@
 Arguments: 
-  /home/lucas/.nvm/versions/node/v14.15.0/bin/node /usr/bin/yarn add doten
+  /home/lucas/.nvm/versions/node/v14.15.0/bin/node /usr/bin/yarn add multer
 
 PATH: 
   /home/lucas/.nvm/versions/node/v14.15.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/lucas/.local/bin:/home/lucas/.local/bin:/home/lucas/Android/Sdk/emulator:/home/lucas/Android/Sdk/tools:/home/lucas/Android/Sdk/tools/bin:/home/lucas/Android/Sdk/platform-tools:/home/lucas/.fzf/bin
@@ -14,17 +14,8 @@ Platform:
   linux x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/doten: Not found
-      at Request.params.callback [as _callback] (/usr/lib/node_modules/yarn/lib/cli.js:66988:18)
-      at Request.self.callback (/usr/lib/node_modules/yarn/lib/cli.js:140662:22)
-      at Request.emit (events.js:315:20)
-      at Request.<anonymous> (/usr/lib/node_modules/yarn/lib/cli.js:141634:10)
-      at Request.emit (events.js:315:20)
-      at IncomingMessage.<anonymous> (/usr/lib/node_modules/yarn/lib/cli.js:141556:12)
-      at Object.onceWrapper (events.js:421:28)
-      at IncomingMessage.emit (events.js:327:22)
-      at endReadableNT (_stream_readable.js:1327:12)
-      at processTicksAndRejections (internal/process/task_queues.js:80:21)
+  Error: getaddrinfo EAI_AGAIN registry.yarnpkg.com
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:67:26)
 
 npm manifest: 
   {
@@ -35,6 +26,7 @@ npm manifest:
     "type": "module",
     "dependencies": {
       "cors": "^2.8.5",
+      "dotenv": "^10.0.0",
       "express": "^4.17.1",
       "mysql2": "^2.3.2",
       "nodemailer": "^6.7.0",
@@ -42,7 +34,8 @@ npm manifest:
       "nodemon": "^2.0.14"
     },
     "scripts": {
-      "dev": "nodemon --experimental-modules --es-module-specifier-resolution=node server.js"
+      "start": "NODE_ENV=production node --experimental-modules --es-module-specifier-resolution=node server.js",
+      "dev": "NODE_ENV=development nodemon --experimental-modules --es-module-specifier-resolution=node server.js"
     }
   }
 
@@ -345,6 +338,11 @@ Lockfile:
     integrity sha512-QM8q3zDe58hqUqjraQOmzZ1LIH9SWQJTlEKCH4kJ2oQvLZk7RbQXvtDM2XEq3fwkV9CCvvH4LA0AV+ogFsBM2Q==
     dependencies:
       is-obj "^2.0.0"
+  
+  dotenv@^10.0.0:
+    version "10.0.0"
+    resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-10.0.0.tgz#3d4227b8fb95f81096cdd2b66653fb2c7085ba81"
+    integrity sha512-rlBi9d8jpv9Sf1klPjNfFAuWDjKLwTIJJ/VxtoTwIR6hnZxcEOQCZg2oIL3MWBYw5GpUDKOEnND7LXTbIpQ03Q==
   
   duplexer3@^0.1.4:
     version "0.1.4"
