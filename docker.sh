@@ -1,0 +1,1 @@
+docker build . -t LucasTI79/psico-node-app

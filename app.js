@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import { routes } from './src/app/routes/index.js';
+import routes from './src/app/routes/index.js';
 import { config } from 'dotenv';
 import path from 'node:path';
 import { fileURLToPath } from 'url';

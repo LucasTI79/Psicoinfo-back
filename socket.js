@@ -16,14 +16,30 @@ io.on("connection", (socket) => {
 
   socket.emit("nickname")
 
-  socket.on("nickname", name => {
-    users[socket.id] = name;
-    console.log('newUser', users[socket.id])
+  socket.on("nickname", ({ username, email, filename = 'user.png' }) => {
+    const userAlreadExists = users.find(user => user.email === email);
 
-
+    if(userAlreadExists){
+      userAlreadExists.id = socket.id;
+      console.log('user reconnect', userAlreadExists)
+    }else{
+      users.push({
+        id: socket.id,
+        username,
+        email,
+        filename
+      })
+      console.log('newUser', {
+        id: socket.id,
+        username,
+        email,
+        filename
+      });
+    }
+    
     io.sockets.emit("system", {
       type: 'connect',
-      username: users[socket.id]
+      username: users.find(user => user.id = socket.id).username
     });
     socket.emit("atualizar mensagens antigas", messages)
   });
@@ -31,20 +47,23 @@ io.on("connection", (socket) => {
   // socket.emit("atualizar mensagens antigas", messages)
 
   // ...
-  socket.on("enviar mensagem", function(mensagem_enviada, callback){
-    // console.log('msg enviada', mensagem_enviada)
+  socket.on("enviar mensagem", function(mensagem_enviada, cb){
+   
     mensagem_enviada.datetime = pegarDataAtual();
+
+    console.log('msg enviada', mensagem_enviada)
+    // console.log('mensagem_enviada',mensagem_enviada)
     // console.log('mensagem_enviada',mensagem_enviada)
     messages.push(mensagem_enviada);
-    io.sockets.emit("atualizar mensagens", mensagem_enviada);
-    callback();
+    socket.broadcast.emit("atualizar mensagens", mensagem_enviada);
+    cb && cb();
   });
   socket.on("disconnect", () => {
     // not triggered
     console.log(`socket:${socket.id}:disconnect!`)
     io.sockets.emit("system", {
       type: 'disconnect',
-      username: users[socket.id]
+      username: users.find(user => user.id = socket.id).username
     });
   });
 });

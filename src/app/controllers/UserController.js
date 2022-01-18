@@ -1,8 +1,8 @@
-import createUser from "../services/createUser";
-import listUsers from "../services/listUsers";
-import authUser from "../services/authUser";
-import forgotUser from "../services/forgotUser";
-import resetPassword from "../services/resetPassword";
+import createUser from "../services/user/createUser";
+import listUsers from "../services/user/listUsers";
+import authUser from "../services/user/authUser";
+import forgotUser from "../services/user/forgotUser";
+import resetPassword from "../services/user/resetPassword";
 
 export default {
   async index(req,res){
@@ -11,7 +11,7 @@ export default {
       // console.log('users',user)
       res.status(200).json(user);
     }catch(err){
-      console.log('err',err)
+      // console.log('err',err)
       res.status(400).json({ error: 'Erro ao retornar usuários' });
     }
   },
@@ -26,7 +26,7 @@ export default {
       await createUser(username, email, password, req.file.filename );
       res.status(201).json({ message: 'Usuário criado com sucesso' });
     }catch(err){
-      res.status(400).json({ error: err.message });
+      res.status(400).json({ error: err });
     }
   },
   update(req,res){
@@ -41,7 +41,7 @@ export default {
       res.status(200).json({user});
     }catch(err){
       console.log('err',err)
-      res.status(400).json({ error: err.message });
+      res.status(400).json({ error: err });
     }
   },
 
@@ -51,7 +51,7 @@ export default {
         await forgotUser(email);
         res.status(200).json({ message: 'Email enviado' });
         }catch(err){
-        res.status(400).send({ error: err.message});
+        res.status(400).send({ error: err});
      }
   },
 

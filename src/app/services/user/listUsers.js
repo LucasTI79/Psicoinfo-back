@@ -1,4 +1,4 @@
-import UsersRepository from "../repository/UsersRepository"
+import UsersRepository from "../../repository/UsersRepository"
 
 export default async function handle(){
   try{

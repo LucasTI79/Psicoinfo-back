@@ -1,5 +1,5 @@
-import UsersRepository from "../repository/UsersRepository"
-import mailer from '../../modules/mailer'
+import UsersRepository from "../../repository/UsersRepository"
+import mailer from '../../../modules/mailer'
 import crypto from 'crypto';
 
 export default async function handle(email){

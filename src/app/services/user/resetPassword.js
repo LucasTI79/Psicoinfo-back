@@ -1,6 +1,4 @@
-import UsersRepository from "../repository/UsersRepository"
-import mailer from '../../modules/mailer'
-import crypto from 'crypto';
+import UsersRepository from "../../repository/UsersRepository"
 
 export default async function handle(token, password){
   try{

@@ -1,16 +1,16 @@
 import execute from "../../database/connection";
 
 export default {
-  async createUser(username, email, password, filename = 'user.jpg'){
+  async createUser(username, email, password, filename = 'user.png'){
     try{
       const query = `
       INSERT INTO tbUsers (username, email, pw, filename) VALUES ('${username}', '${email}', '${password}','${filename}');`;
   
      return await execute(query);
     }catch(err){
-      console.log('err',err)
-      throw new Error('Erro ao criar usuário')
-    }
+      console.lo
+      let erro;
+      throw erro    }
     
   },
 
@@ -21,7 +21,8 @@ export default {
       const users = await execute(query); 
       return users
     }catch(err){
-      throw new Error('Erro ao listar usuários')
+      let erro;
+      throw erro = "Erro ao listar usuários"
     }
    
   },
@@ -32,7 +33,8 @@ export default {
       const user = await execute(query);
       return user
     }catch(err){
-      throw new Error('Erro ao listar usuário por id')
+      let erro;
+      throw erro = "Erro ao listar usuário por id"
     }
     
   },
@@ -43,7 +45,8 @@ export default {
       const user = await execute(query);
       return user
     }catch(err){
-      throw new Error('Erro ao listar usuário por id')
+      let erro;
+      throw erro = "Erro ao listar usuário por id"
     }
   },
 
@@ -53,7 +56,8 @@ export default {
       const user = await execute(query);
       return user
     }catch(err){
-      throw new Error('Erro ao listar usuário por id')
+      let erro;
+      throw erro = 'Erro ao listar usuário por id'
     }
   },
 
@@ -65,7 +69,8 @@ export default {
       // console.log('userRepository', user)
       return user
     }catch(err){
-      throw new Error('Erro ao autenticar')
+      let erro;
+      throw erro = 'Erro ao autenticar'
     }
     
   },
@@ -76,7 +81,8 @@ export default {
       console.log('query',query);
       return await execute(query);
     }catch(err){
-      throw new Error('Erro ao alterar o token do usuário')
+      let erro;
+      throw erro = "Erro ao alterar o token do usuário"
     }
   },
 
@@ -85,7 +91,8 @@ export default {
       const query = `UPDATE tbUsers SET pw = '${password}' where passwordResetToken = '${token}'`;
       return await execute(query);
     }catch(err){
-      throw new Error('Erro ao alterar a senha')
+      let erro;
+      throw erro = "Erro ao alterar a senha"
     }
   }
 }

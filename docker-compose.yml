@@ -1,0 +1,17 @@
+version: '3'
+services:
+  web:
+    build: .
+    command: npm run dev
+    volumes:
+      - .:/usr/app/
+      - /usr/app/node_modules
+    ports:
+      - "3333:3333"
+    depends_on:
+      - mysql
+  mysql:
+    image: mysql
+    environment:
+      USER: root
+      PASSWORD: admin
